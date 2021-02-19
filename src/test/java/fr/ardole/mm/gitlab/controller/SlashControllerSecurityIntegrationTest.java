@@ -20,7 +20,7 @@ class SlashControllerSecurityIntegrationTest {
     MockMvc mockMvc;
 
     @Test
-    public void doGetIsForbidden() throws Exception {
+    public void doGetIsForbiddenWhatEver() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
         mockMvc.perform(get("/login"))
@@ -43,14 +43,20 @@ class SlashControllerSecurityIntegrationTest {
 
     @Test
     public void doPostWithTokenButWithoutMediaTypeIsForbidden() throws Exception {
-        mockMvc.perform(post("/").param("token", "value").contentType(""))
+        mockMvc.perform(post("/").param("token", "the-very-secured-value").contentType(""))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()));
-        mockMvc.perform(post("/").param("token", "value").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/").param("token", "the-very-secured-value").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()));
-        mockMvc.perform(post("/").param("token", "value").contentType(MediaType.APPLICATION_XML))
+        mockMvc.perform(post("/").param("token", "the-very-secured-value").contentType(MediaType.APPLICATION_XML))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()));
-        mockMvc.perform(post("/").param("token", "value").contentType(MediaType.APPLICATION_OCTET_STREAM))
+        mockMvc.perform(post("/").param("token", "the-very-secured-value").contentType(MediaType.APPLICATION_OCTET_STREAM))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value()));
+    }
+
+    @Test
+    public void doPostWithGoodMediaTypeButBadTokenIsForbidden() throws Exception {
+        mockMvc.perform(post("/").param("token", "the-very-BAD-secured-value").contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
     }
 
 }

@@ -26,6 +26,13 @@ security.mm-token=the-very-secured-value
 ## Start it
 
 ### Java
+
+- Local way
+
+```
+mvn spring-boot:run
+```
+
 ### Docker
 ### OpenShift
 
