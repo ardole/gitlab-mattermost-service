@@ -20,6 +20,7 @@ mvn clean install
 - With an `application.properties`
 
 ```
+security.mm-token=the-very-secured-value
 ```
 
 ## Start it
