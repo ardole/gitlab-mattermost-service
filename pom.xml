@@ -15,6 +15,7 @@
 	<description>Provide a slash command service for mattermost, able to retrieve information on Gitab CI</description>
 	<properties>
 		<java.version>11</java.version>
+		<freemarker.version>2.3.30</freemarker.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -34,6 +35,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
 		</dependency>
 	</dependencies>
 

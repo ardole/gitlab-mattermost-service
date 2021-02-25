@@ -1,6 +1,6 @@
 package fr.ardole.mm.gitlab.model;
 
-public class SlashQuery {
+public class MMQuery {
 
     private String text;
     private String channel_id;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class SlashResponse {
+public class MMResponse {
 
     private String text;
     private ResponseType responseType = ResponseType.in_channel;
@@ -25,5 +25,11 @@ public class SlashResponse {
         this.responseType = responseType;
     }
 
-
+    @Override
+    public String toString() {
+        return "SlashResponse{" +
+                "text='" + text + '\'' +
+                ", responseType=" + responseType +
+                '}';
+    }
 }

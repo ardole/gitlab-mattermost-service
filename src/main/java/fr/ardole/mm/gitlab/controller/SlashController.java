@@ -1,7 +1,7 @@
 package fr.ardole.mm.gitlab.controller;
 
-import fr.ardole.mm.gitlab.model.SlashQuery;
-import fr.ardole.mm.gitlab.model.SlashResponse;
+import fr.ardole.mm.gitlab.model.MMQuery;
+import fr.ardole.mm.gitlab.model.MMResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -18,9 +18,9 @@ public class SlashController {
                     method = RequestMethod.POST,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public SlashResponse slashCommand(SlashQuery slashQuery) {
+    public MMResponse slashCommand(MMQuery slashQuery) {
         LOGGER.debug("Receive new query " + slashQuery);
-        SlashResponse slashResponse = new SlashResponse();
+        MMResponse slashResponse = new MMResponse();
         slashResponse.setText("# Hello :smile:\n\n|Col 1|Col 2|\n|---|---|\n|One|Two|\n");
         return slashResponse;
     }
