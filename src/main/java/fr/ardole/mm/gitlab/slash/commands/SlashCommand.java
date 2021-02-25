@@ -1,6 +1,7 @@
 package fr.ardole.mm.gitlab.slash.commands;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class SlashCommand {
 
@@ -10,7 +11,14 @@ public abstract class SlashCommand {
         this.arguments = arguments;
     }
 
-    public abstract SlashCommandResult execute();
+    public SlashCommandResult execute() {
+        SlashCommandResult slashCommandResult = new SlashCommandResult();
+        slashCommandResult.setInitialCommand(this);
+        slashCommandResult.setDatas(executeAndGetDatas());
+        return slashCommandResult;
+    }
+
+    protected abstract Map<String, Object> executeAndGetDatas();
 
     public abstract String getMarkdownTemplateName();
 }

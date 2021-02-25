@@ -56,3 +56,6 @@ For now its a simple SpringBoot Project, but it may be in the future:
 Will use these libraries:
 - [gitlab4j-api](https://github.com/gitlab4j/gitlab4j-api)
 - maybe a template engine
+
+What it will become ?
+- A generic service with dependencies injection of command

@@ -4,12 +4,12 @@ import fr.ardole.mm.gitlab.exception.SlashCommandException;
 import fr.ardole.mm.gitlab.model.MMQuery;
 import fr.ardole.mm.gitlab.slash.commands.HelpCommand;
 import fr.ardole.mm.gitlab.slash.commands.SlashCommand;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommandResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class QueryCommandMapper {
@@ -32,7 +32,7 @@ public class QueryCommandMapper {
             case "other":
                 SlashCommand slashCommand = new SlashCommand() {
                     @Override
-                    public SlashCommandResult execute() {
+                    protected Map<String, Object> executeAndGetDatas() {
                         return null;
                     }
 

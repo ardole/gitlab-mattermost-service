@@ -35,17 +35,14 @@ class FreemarkerResponseConverterTest {
     public static class TestCommand extends SlashCommand {
 
         @Override
-        public SlashCommandResult execute() {
+        public Map<String, Object> executeAndGetDatas() {
             Map<String, Object> map = new HashMap<>();
             map.put("user", "Evoklo");
             Product product = new Product();
             product.setName("Vaster 1");
             product.setUrl("https://vaster1vprod.http.moon");
             map.put("latestProduct", product);
-            SlashCommandResult slashCommandResult = new SlashCommandResult();
-            slashCommandResult.setInitialCommand(this);
-            slashCommandResult.setDatas(map);
-            return slashCommandResult;
+            return map;
         }
 
         @Override

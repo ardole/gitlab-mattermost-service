@@ -29,7 +29,7 @@ class SlashControllerIntegrationTest {
                 .param("response_url", "http%3A%2F%2F10.0.0.5%3A8065%2Fhooks%2Fcommands%2Fzozc1xwxybdedeyz8djwjpngny")
                 .param("team_domain", "rrrr")
                 .param("team_id", "tsb8crrn5tgqtedpkt81b4tcya")
-                .param("text", "asd")
+                .param("text", "help")
                 .param("token", "the-very-secured-value")
                 .param("trigger_id", "NG1kM3lyN2NqYmQxcGNyc2s0Nmo5em0xb2M6azF4NGFxZGp5MzgxM2M4NG03NzFlb2M5eG86MTU1MTIwODE5NTQyNzpNRVVDSUhSdWFrdmVGZ0RhTTd6UERoMWVEVndZK2NGbXlSYUxWQ054SVRLZGdxTWZBaUVBeGQvOU95NTFOeWxiTWVsRE1ZK0d4S2FzL2Z1TUU2Y0J1bW5JbFBCOXVEVT0%3D")
                 .param("user_id", "k1x4aqdjy3813c84m771eoc9xo")
