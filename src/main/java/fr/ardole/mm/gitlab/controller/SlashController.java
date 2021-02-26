@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,10 @@ public class SlashController {
                     method = RequestMethod.POST,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public MMResponse slashCommand(MMQuery slashQuery) {
+    public ResponseEntity<MMResponse> slashCommand(MMQuery slashQuery) {
         LOGGER.debug("Receive new query " + slashQuery);
-        return slashCommandService.run(slashQuery);
+        MMResponse mmResponse = slashCommandService.run(slashQuery);
+        return ResponseEntity.ok().body(mmResponse);
     }
 
 

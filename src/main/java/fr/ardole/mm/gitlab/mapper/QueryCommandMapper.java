@@ -1,9 +1,10 @@
 package fr.ardole.mm.gitlab.mapper;
 
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
+import fr.ardole.mm.gitlab.exception.UnknownCommandException;
 import fr.ardole.mm.gitlab.model.MMQuery;
-import fr.ardole.mm.gitlab.slash.commands.HelpCommand;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommand;
+import fr.ardole.mm.gitlab.slash.command.SlashCommand;
+import fr.ardole.mm.gitlab.slash.command.predefined.HelpCommand;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -23,10 +24,10 @@ public class QueryCommandMapper {
         }
     }
 
-    private SlashCommand extractCommandFromQueryText(String command) {
-        String[] arguments = command.trim().toLowerCase().split(" ");
-        String module = arguments[0];
-        switch (module) {
+    private SlashCommand extractCommandFromQueryText(String text) {
+        String[] arguments = text.trim().toLowerCase().split(" ");
+        String command = arguments[0];
+        switch (command) {
             case "help":
                 return new HelpCommand();
             case "other":
@@ -45,7 +46,7 @@ public class QueryCommandMapper {
                 slashCommand.setArguments(argumentsList);
                 return slashCommand;
             default:
-                throw new SlashCommandException("Unknown command '" + module + "'");
+                throw new UnknownCommandException(command);
         }
     }
 

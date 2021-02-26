@@ -1,4 +1,4 @@
-package fr.ardole.mm.gitlab.slash.commands;
+package fr.ardole.mm.gitlab.slash.command;
 
 import java.util.Map;
 

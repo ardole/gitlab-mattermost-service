@@ -2,7 +2,7 @@ package fr.ardole.mm.gitlab.slash.converter;
 
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
 import fr.ardole.mm.gitlab.model.MMResponse;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommandResult;
+import fr.ardole.mm.gitlab.slash.command.SlashCommandResult;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

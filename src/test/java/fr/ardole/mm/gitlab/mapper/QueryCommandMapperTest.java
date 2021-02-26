@@ -1,9 +1,10 @@
 package fr.ardole.mm.gitlab.mapper;
 
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
+import fr.ardole.mm.gitlab.exception.UnknownCommandException;
 import fr.ardole.mm.gitlab.model.MMQuery;
-import fr.ardole.mm.gitlab.slash.commands.HelpCommand;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommand;
+import fr.ardole.mm.gitlab.slash.command.SlashCommand;
+import fr.ardole.mm.gitlab.slash.command.predefined.HelpCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,7 +47,7 @@ class QueryCommandMapperTest {
         assertThat(exception.getMessage(), is(equalTo("No text given to command")));
 
         query.setText("hellooooooooooooo");
-        exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.queryToCommand(query));
+        exception = assertThrows(UnknownCommandException.class, () -> queryCommandMapper.queryToCommand(query));
         assertThat(exception.getMessage(), is(equalTo("Unknown command 'hellooooooooooooo'")));
     }
 

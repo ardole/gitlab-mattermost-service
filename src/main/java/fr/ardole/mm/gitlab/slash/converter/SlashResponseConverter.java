@@ -1,7 +1,7 @@
 package fr.ardole.mm.gitlab.slash.converter;
 
 import fr.ardole.mm.gitlab.model.MMResponse;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommandResult;
+import fr.ardole.mm.gitlab.slash.command.SlashCommandResult;
 
 public interface SlashResponseConverter {
 

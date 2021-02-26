@@ -2,8 +2,8 @@ package fr.ardole.mm.gitlab.slash.converter;
 
 import fr.ardole.mm.gitlab.model.MMResponse;
 import fr.ardole.mm.gitlab.model.ResponseType;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommand;
-import fr.ardole.mm.gitlab.slash.commands.SlashCommandResult;
+import fr.ardole.mm.gitlab.slash.command.SlashCommand;
+import fr.ardole.mm.gitlab.slash.command.SlashCommandResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
