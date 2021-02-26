@@ -1,5 +1,7 @@
 # Gitlab Mattermost Service
 
+[![Java CI with Maven](https://github.com/ardole/gitlab-mattermost-service/actions/workflows/maven.yml/badge.svg)](https://github.com/ardole/gitlab-mattermost-service/actions/workflows/maven.yml) [![codecov](https://codecov.io/gh/ardole/gitlab-mattermost-service/branch/master/graph/badge.svg?token=KTN11YDGE1)](https://codecov.io/gh/ardole/gitlab-mattermost-service)
+
 Main goal of this project is to build a slash command service for mattermost, providing:
 - List of *applications* (projects) inside a group
 - List of environments inside a group
