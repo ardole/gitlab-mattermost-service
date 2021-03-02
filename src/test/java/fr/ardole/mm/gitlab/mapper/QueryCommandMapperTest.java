@@ -6,14 +6,18 @@ import fr.ardole.mm.gitlab.model.MMQuery;
 import fr.ardole.mm.gitlab.slash.command.SlashCommand;
 import fr.ardole.mm.gitlab.slash.command.predefined.HelpCommand;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SpringBootTest
 class QueryCommandMapperTest {
 
-    QueryCommandMapper queryCommandMapper = new QueryCommandMapper();
+    @Autowired
+    QueryCommandMapper queryCommandMapper;
 
     @Test
     void queryToCommand() {

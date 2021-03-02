@@ -25,7 +25,7 @@ class FreemarkerResponseConverterTest {
         SlashCommandResult slashCommandResult = testCommand.execute();
 
         MMResponse mmResponse = converter.convert(slashCommandResult);
-        assertThat(mmResponse.getResponseType(), is(equalTo(ResponseType.in_channel)));
+        assertThat(mmResponse.getResponseType(), is(equalTo(ResponseType.ephemeral)));
         assertThat(mmResponse.getText(), is(equalTo("# Welcome!\n\n## Welcome Evoklo !\n\nOur latest product: [Vaster 1](https://vaster1vprod.http.moon])")));
     }
 
