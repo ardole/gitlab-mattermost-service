@@ -24,9 +24,9 @@ public class MattermostRequestMatcher implements RequestMatcher {
     public boolean matches(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getParameter("token");
         if (tokenIsValid(token)) {
-            LOGGER.error("New request with a bad token, refused");
             return true;
         } else {
+            LOGGER.error("New request with a bad token, refused");
             return false;
         }
     }
