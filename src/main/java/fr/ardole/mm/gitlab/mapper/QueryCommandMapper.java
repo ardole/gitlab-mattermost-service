@@ -4,7 +4,8 @@ import fr.ardole.mm.gitlab.exception.SlashCommandException;
 import fr.ardole.mm.gitlab.exception.UnknownCommandException;
 import fr.ardole.mm.gitlab.model.MMQuery;
 import fr.ardole.mm.gitlab.slash.command.SlashCommand;
-import fr.ardole.mm.gitlab.slash.command.predefined.HelpCommand;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -14,6 +15,9 @@ import java.util.Map;
 
 @Component
 public class QueryCommandMapper {
+
+    @Autowired
+    private ApplicationContext context;
 
     public SlashCommand queryToCommand(MMQuery MMQuery) {
         String text = MMQuery.getText();
@@ -29,7 +33,7 @@ public class QueryCommandMapper {
         String command = arguments[0];
         switch (command) {
             case "help":
-                return new HelpCommand();
+                return context.getBean("HelpCommand", SlashCommand.class);
             case "other":
                 SlashCommand slashCommand = new SlashCommand() {
                     @Override

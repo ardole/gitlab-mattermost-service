@@ -20,10 +20,13 @@ public class SlashExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     SlashCommandService slashCommandService;
 
+    @Autowired
+    ErrorCommand errorCommand;
+
     @ExceptionHandler(Exception.class)
     public @ResponseBody ResponseEntity<MMResponse> handleCommandException(Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
-        return ResponseEntity.ok(slashCommandService.run(new ErrorCommand()));
+        return ResponseEntity.ok(slashCommandService.run(errorCommand));
     }
 
 }
