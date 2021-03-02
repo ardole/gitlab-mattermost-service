@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class MMResponse {
 
     private String text;
-    private ResponseType responseType = ResponseType.in_channel;
+    private ResponseType responseType = ResponseType.ephemeral;
 
     public String getText() {
         return text;
