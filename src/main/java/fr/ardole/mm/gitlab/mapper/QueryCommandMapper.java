@@ -9,10 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 @Component
 public class QueryCommandMapper {
 
@@ -34,21 +30,8 @@ public class QueryCommandMapper {
         switch (command) {
             case "help":
                 return context.getBean("HelpCommand", SlashCommand.class);
-            case "other":
-                SlashCommand slashCommand = new SlashCommand() {
-                    @Override
-                    protected Map<String, Object> executeAndGetDatas() {
-                        return null;
-                    }
-
-                    @Override
-                    public String getMarkdownTemplateName() {
-                        return null;
-                    }
-                };
-                List<String> argumentsList = Arrays.asList(Arrays.copyOfRange(arguments, 1, arguments.length));
-                slashCommand.setArguments(argumentsList);
-                return slashCommand;
+            case "project":
+                return context.getBean("ProjectCommand", SlashCommand.class);
             default:
                 throw new UnknownCommandException(command);
         }

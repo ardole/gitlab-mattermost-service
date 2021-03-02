@@ -9,6 +9,12 @@ Main goal of this project is to build a slash command service for mattermost, pr
 - Test status of an application over simple http request
 - Get list of pending merge requests...
 
+## Commands
+
+|Command|Description|
+|---|---|
+|`/gitlab help`|Print the help|
+
 ## Build it
 
 - With Maven
@@ -22,7 +28,12 @@ mvn clean install
 - With an `application.properties`
 
 ```
+# If you would like to configure the mm token in plain text
 security.mm-token=the-very-secured-value
+# If you would like to configure the mm token with hash value (bcrypt)
+security.mm-token-bcrypted=$2y$12$U6DuGjXkL7oNPsfLw8KCpeXK2cT6qfMhNriHEHanrsG2yJx9PlmN2
+slash.gitlab-host-url=https://gitlab.com
+slash.gitlab-personal-access-token=your-personnal-token
 ```
 
 ## Start it
@@ -55,9 +66,9 @@ For now its a simple SpringBoot Project, but it may be in the future:
 - A Go project
 - Or anything else that I want to try
 
-Will use these libraries:
+It uses these libraries:
 - [gitlab4j-api](https://github.com/gitlab4j/gitlab4j-api)
-- maybe a template engine
+- [Freemarker](https://freemarker.apache.org/)
 
 What it will become ?
-- A generic service with dependencies injection of command
+- A generic service with dependencies injection of command, maybe a Karaf project ?
