@@ -70,5 +70,14 @@ It uses these libraries:
 - [gitlab4j-api](https://github.com/gitlab4j/gitlab4j-api)
 - [Freemarker](https://freemarker.apache.org/)
 
+## TODO
+
+- Refactor SlashCommand to inject parameters, simplify mapping
+- Restrict access to data according to their rights on Gitlab
+- Allow multiple alias for commands
+- Automatic mapper of commands according to configuration
+- Automatic mapper of commands according to class-loader
+- Auto generation of help according to available commands
+
 What it will become ?
 - A generic service with dependencies injection of command, maybe a Karaf project ?
