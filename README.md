@@ -72,7 +72,6 @@ It uses these libraries:
 
 ## TODO
 
-- Refactor SlashCommand to inject parameters, simplify mapping
 - Restrict access to data according to their rights on Gitlab
 - Allow multiple alias for commands
 - Automatic mapper of commands according to configuration
