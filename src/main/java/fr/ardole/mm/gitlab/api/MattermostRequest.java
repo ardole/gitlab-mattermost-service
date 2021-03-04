@@ -1,6 +1,6 @@
 package fr.ardole.mm.gitlab.api;
 
-public class MMQuery {
+public class MattermostRequest {
 
     private String text;
     private String channel_id;

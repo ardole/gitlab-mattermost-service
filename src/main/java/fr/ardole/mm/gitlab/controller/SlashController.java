@@ -1,7 +1,7 @@
 package fr.ardole.mm.gitlab.controller;
 
-import fr.ardole.mm.gitlab.api.MMQuery;
-import fr.ardole.mm.gitlab.api.MMResponse;
+import fr.ardole.mm.gitlab.api.MattermostRequest;
+import fr.ardole.mm.gitlab.api.MattermostResponse;
 import fr.ardole.mm.gitlab.service.SlashCommandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +24,10 @@ public class SlashController {
                     method = RequestMethod.POST,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<MMResponse> slashCommand(MMQuery slashQuery) {
+    public ResponseEntity<MattermostResponse> slashCommand(MattermostRequest slashQuery) {
         LOGGER.debug("Receive new query " + slashQuery);
-        MMResponse mmResponse = slashCommandService.run(slashQuery);
-        return ResponseEntity.ok().body(mmResponse);
+        MattermostResponse mattermostResponse = slashCommandService.run(slashQuery);
+        return ResponseEntity.ok().body(mattermostResponse);
     }
 
 

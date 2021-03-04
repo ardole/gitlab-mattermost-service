@@ -1,6 +1,6 @@
 package fr.ardole.mm.gitlab.handler;
 
-import fr.ardole.mm.gitlab.api.MMResponse;
+import fr.ardole.mm.gitlab.api.MattermostResponse;
 import fr.ardole.mm.gitlab.service.SlashCommandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class SlashExceptionHandler extends ResponseEntityExceptionHandler {
     SlashCommandService slashCommandService;
 
     @ExceptionHandler(Exception.class)
-    public @ResponseBody ResponseEntity<MMResponse> handleCommandException(Exception ex) {
+    public @ResponseBody ResponseEntity<MattermostResponse> handleCommandException(Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         return ResponseEntity.ok(slashCommandService.getErrorCommandResult());
     }

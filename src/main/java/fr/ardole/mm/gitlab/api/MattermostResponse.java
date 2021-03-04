@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class MMResponse {
+public class MattermostResponse {
 
     private String text;
     private ResponseType responseType = ResponseType.ephemeral;

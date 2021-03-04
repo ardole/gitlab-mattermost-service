@@ -1,7 +1,7 @@
 package fr.ardole.mm.gitlab.mapper;
 
-import fr.ardole.mm.gitlab.api.MMQuery;
-import fr.ardole.mm.gitlab.api.MMResponse;
+import fr.ardole.mm.gitlab.api.MattermostRequest;
+import fr.ardole.mm.gitlab.api.MattermostResponse;
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
 import fr.ardole.mm.gitlab.model.SlashCommand;
 import fr.ardole.mm.gitlab.model.SlashCommandResult;
@@ -14,8 +14,8 @@ import java.util.List;
 @Component
 public class QueryCommandMapper {
 
-    public SlashCommand queryToCommand(MMQuery MMQuery) {
-        String text = MMQuery.getText();
+    public SlashCommand queryToCommand(MattermostRequest MattermostRequest) {
+        String text = MattermostRequest.getText();
         if (StringUtils.hasText(text)) {
             return extractCommandFromQueryText(text);
         } else {
@@ -32,10 +32,10 @@ public class QueryCommandMapper {
         return slashCommand;
     }
 
-    public MMResponse resultToResponse(SlashCommandResult slashCommandResult) {
-        MMResponse response = new MMResponse();
-        response.setText(slashCommandResult.getText());
-        return response;
+    public MattermostResponse resultToResponse(SlashCommandResult slashCommandResult) {
+        MattermostResponse mattermostResponse = new MattermostResponse();
+        mattermostResponse.setText(slashCommandResult.getText());
+        return mattermostResponse;
     }
 
 }
