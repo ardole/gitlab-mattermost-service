@@ -1,19 +1,18 @@
 package fr.ardole.mm.gitlab.mapper;
 
+import fr.ardole.mm.gitlab.api.MMQuery;
+import fr.ardole.mm.gitlab.api.MMResponse;
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
-import fr.ardole.mm.gitlab.exception.UnknownCommandException;
-import fr.ardole.mm.gitlab.model.MMQuery;
-import fr.ardole.mm.gitlab.slash.command.SlashCommand;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import fr.ardole.mm.gitlab.model.SlashCommand;
+import fr.ardole.mm.gitlab.model.SlashCommandResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 public class QueryCommandMapper {
-
-    @Autowired
-    private ApplicationContext context;
 
     public SlashCommand queryToCommand(MMQuery MMQuery) {
         String text = MMQuery.getText();
@@ -26,15 +25,17 @@ public class QueryCommandMapper {
 
     private SlashCommand extractCommandFromQueryText(String text) {
         String[] arguments = text.trim().toLowerCase().split(" ");
-        String command = arguments[0];
-        switch (command) {
-            case "help":
-                return context.getBean("HelpCommand", SlashCommand.class);
-            case "project":
-                return context.getBean("ProjectCommand", SlashCommand.class);
-            default:
-                throw new UnknownCommandException(command);
-        }
+        String module = arguments[0];
+        SlashCommand slashCommand = new SlashCommand();
+        slashCommand.setModule(module);
+        slashCommand.setArguments(List.of(Arrays.copyOfRange(arguments, 1, arguments.length)));
+        return slashCommand;
+    }
+
+    public MMResponse resultToResponse(SlashCommandResult slashCommandResult) {
+        MMResponse response = new MMResponse();
+        response.setText(slashCommandResult.getText());
+        return response;
     }
 
 }

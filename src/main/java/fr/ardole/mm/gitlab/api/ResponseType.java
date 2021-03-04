@@ -1,4 +1,4 @@
-package fr.ardole.mm.gitlab.model;
+package fr.ardole.mm.gitlab.api;
 
 public enum ResponseType {
 

@@ -1,4 +1,4 @@
-package fr.ardole.mm.gitlab.model;
+package fr.ardole.mm.gitlab.api;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

@@ -1,8 +1,7 @@
 package fr.ardole.mm.gitlab.handler;
 
-import fr.ardole.mm.gitlab.model.MMResponse;
+import fr.ardole.mm.gitlab.api.MMResponse;
 import fr.ardole.mm.gitlab.service.SlashCommandService;
-import fr.ardole.mm.gitlab.slash.command.predefined.ErrorCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +19,10 @@ public class SlashExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     SlashCommandService slashCommandService;
 
-    @Autowired
-    ErrorCommand errorCommand;
-
     @ExceptionHandler(Exception.class)
     public @ResponseBody ResponseEntity<MMResponse> handleCommandException(Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
-        return ResponseEntity.ok(slashCommandService.run(errorCommand));
+        return ResponseEntity.ok(slashCommandService.getErrorCommandResult());
     }
 
 }

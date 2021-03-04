@@ -1,8 +1,7 @@
 package fr.ardole.mm.gitlab.slash.converter;
 
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
-import fr.ardole.mm.gitlab.model.MMResponse;
-import fr.ardole.mm.gitlab.slash.command.SlashCommandResult;
+import fr.ardole.mm.gitlab.slash.api.SlashResponseConverter;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Map;
 
 @Component
 public class FreemarkerResponseConverter implements SlashResponseConverter {
@@ -25,16 +25,14 @@ public class FreemarkerResponseConverter implements SlashResponseConverter {
         this.freemarkerTemplateBasePackagePath = freemarkerTemplateBasePackagePath;
     }
 
-    public MMResponse convert(SlashCommandResult slashCommandResult) {
+    public String convert(Map<String, Object> map, String markdownTemplateName) {
         Configuration freemarkerConfiguration = getFreemarkerConfiguration();
         try {
-            Template freemarkerTemplate = freemarkerConfiguration.getTemplate(slashCommandResult.getInitialCommand().getMarkdownTemplateName());
+            Template freemarkerTemplate = freemarkerConfiguration.getTemplate(markdownTemplateName);
             try (ByteArrayOutputStream textResultStream = new ByteArrayOutputStream()) {
                 try (Writer textResult = new OutputStreamWriter(textResultStream)) {
-                    freemarkerTemplate.process(slashCommandResult.getDatas(), textResult);
-                    MMResponse response = new MMResponse();
-                    response.setText(textResultStream.toString());
-                    return response;
+                    freemarkerTemplate.process(map, textResult);
+                    return textResultStream.toString();
                 }
             }
         } catch (IOException | TemplateException e) {

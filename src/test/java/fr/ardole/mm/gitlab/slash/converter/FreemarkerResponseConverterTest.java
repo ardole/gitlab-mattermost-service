@@ -1,9 +1,5 @@
 package fr.ardole.mm.gitlab.slash.converter;
 
-import fr.ardole.mm.gitlab.model.MMResponse;
-import fr.ardole.mm.gitlab.model.ResponseType;
-import fr.ardole.mm.gitlab.slash.command.SlashCommand;
-import fr.ardole.mm.gitlab.slash.command.SlashCommandResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -21,59 +17,44 @@ class FreemarkerResponseConverterTest {
         FreemarkerResponseConverter converter = new FreemarkerResponseConverter();
         converter.setFreemarkerTemplateBasePackagePath("/test-templates");
 
-        TestCommand testCommand = new TestCommand();
-        SlashCommandResult slashCommandResult = testCommand.execute();
-
-        MMResponse mmResponse = converter.convert(slashCommandResult);
-        assertThat(mmResponse.getResponseType(), is(equalTo(ResponseType.ephemeral)));
-        assertThat(mmResponse.getText(), is(equalTo("# Welcome!\n\n## Welcome Evoklo !\n\nOur latest product: [Vaster 1](https://vaster1vprod.http.moon])")));
+        String text = converter.convert(getTestMap(), "test.ftl");
+        assertThat(text, is(equalTo("# Welcome!\n\n## Welcome Evoklo !\n\nOur latest product: [Vaster 1](https://vaster1vprod.http.moon])")));
     }
 
-    /*
-     This class is test sample, product class is taken from https://freemarker.apache.org/docs/pgui_quickstart_all.html
+    public Map<String, Object> getTestMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("user", "Evoklo");
+        Product product = new Product();
+        product.setName("Vaster 1");
+        product.setUrl("https://vaster1vprod.http.moon");
+        map.put("latestProduct", product);
+        return map;
+    }
+
+     /*
+     Product class is taken from https://freemarker.apache.org/docs/pgui_quickstart_all.html
      */
-    public static class TestCommand extends SlashCommand {
+    public static class Product {
 
-        @Override
-        public Map<String, Object> executeAndGetDatas() {
-            Map<String, Object> map = new HashMap<>();
-            map.put("user", "Evoklo");
-            Product product = new Product();
-            product.setName("Vaster 1");
-            product.setUrl("https://vaster1vprod.http.moon");
-            map.put("latestProduct", product);
-            return map;
+        private String url;
+        private String name;
+
+        public String getUrl() {
+            return url;
         }
 
-        @Override
-        public String getMarkdownTemplateName() {
-            return "test.ftl";
+        public void setUrl(String url) {
+            this.url = url;
         }
 
-        public static class Product {
+        public String getName() {
+            return name;
+        }
 
-            private String url;
-            private String name;
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
+        public void setName(String name) {
+            this.name = name;
         }
 
     }
-
 
 }

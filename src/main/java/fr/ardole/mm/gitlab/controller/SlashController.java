@@ -1,7 +1,7 @@
 package fr.ardole.mm.gitlab.controller;
 
-import fr.ardole.mm.gitlab.model.MMQuery;
-import fr.ardole.mm.gitlab.model.MMResponse;
+import fr.ardole.mm.gitlab.api.MMQuery;
+import fr.ardole.mm.gitlab.api.MMResponse;
 import fr.ardole.mm.gitlab.service.SlashCommandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
