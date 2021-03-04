@@ -2,7 +2,7 @@ package fr.ardole.mm.gitlab.mapper;
 
 import fr.ardole.mm.gitlab.api.MattermostRequest;
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
-import fr.ardole.mm.gitlab.model.SlashCommand;
+import fr.ardole.mm.gitlab.model.SlashCommandQuery;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,30 +17,30 @@ class QueryCommandMapperTest {
     void queryToCommand() {
         MattermostRequest mattermostRequest = new MattermostRequest();
         mattermostRequest.setText("help");
-        SlashCommand slashCommand = queryCommandMapper.queryToCommand(mattermostRequest);
-        assertThat(slashCommand.getModule(), is(equalTo("help")));
-        assertThat(slashCommand.getArguments(), is(empty()));
+        SlashCommandQuery slashCommandQuery = queryCommandMapper.requestToSlashQuery(mattermostRequest);
+        assertThat(slashCommandQuery.getModule(), is(equalTo("help")));
+        assertThat(slashCommandQuery.getArguments(), is(empty()));
 
 
         mattermostRequest.setText("help you");
-        slashCommand = queryCommandMapper.queryToCommand(mattermostRequest);
-        assertThat(slashCommand.getModule(), is(equalTo("help")));
-        assertThat(slashCommand.getArguments(), hasSize(1));
-        assertThat(slashCommand.getArguments().get(0), is(equalTo("you")));
+        slashCommandQuery = queryCommandMapper.requestToSlashQuery(mattermostRequest);
+        assertThat(slashCommandQuery.getModule(), is(equalTo("help")));
+        assertThat(slashCommandQuery.getArguments(), hasSize(1));
+        assertThat(slashCommandQuery.getArguments().get(0), is(equalTo("you")));
     }
 
     @Test
     void invalidQuery() {
         MattermostRequest mattermostRequest = new MattermostRequest();
-        SlashCommandException exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.queryToCommand(mattermostRequest));
+        SlashCommandException exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.requestToSlashQuery(mattermostRequest));
         assertThat(exception.getMessage(), is(equalTo("No text given to command")));
 
         mattermostRequest.setText("");
-        exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.queryToCommand(mattermostRequest));
+        exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.requestToSlashQuery(mattermostRequest));
         assertThat(exception.getMessage(), is(equalTo("No text given to command")));
 
         mattermostRequest.setText(" ");
-        exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.queryToCommand(mattermostRequest));
+        exception = assertThrows(SlashCommandException.class, () -> queryCommandMapper.requestToSlashQuery(mattermostRequest));
         assertThat(exception.getMessage(), is(equalTo("No text given to command")));
     }
 

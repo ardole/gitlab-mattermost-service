@@ -3,7 +3,7 @@ package fr.ardole.mm.gitlab.service;
 import fr.ardole.mm.gitlab.api.MattermostRequest;
 import fr.ardole.mm.gitlab.api.MattermostResponse;
 import fr.ardole.mm.gitlab.mapper.QueryCommandMapper;
-import fr.ardole.mm.gitlab.model.SlashCommand;
+import fr.ardole.mm.gitlab.model.SlashCommandQuery;
 import fr.ardole.mm.gitlab.model.SlashCommandResult;
 import fr.ardole.mm.gitlab.slash.api.SlashCommandExecuter;
 import fr.ardole.mm.gitlab.slash.predefined.ErrorCommandResult;
@@ -28,7 +28,7 @@ public class SlashCommandService {
     ApplicationContext context;
 
     public MattermostResponse run(MattermostRequest mattermostRequest) {
-        SlashCommand command = queryCommandMapper.queryToCommand(mattermostRequest);
+        SlashCommandQuery command = queryCommandMapper.requestToSlashQuery(mattermostRequest);
         String module = command.getModule();
         SlashCommandExecuter bean;
         switch (module) {
@@ -41,14 +41,14 @@ public class SlashCommandService {
                 return getErrorCommandResult();
         }
         SlashCommandResult result = bean.execute(command);
-        return queryCommandMapper.resultToResponse(result);
+        return queryCommandMapper.slashResultToResponse(result);
     }
 
     public MattermostResponse getErrorCommandResult() {
-        return queryCommandMapper.resultToResponse(errorCommandResult);
+        return queryCommandMapper.slashResultToResponse(errorCommandResult);
     }
 
     public MattermostResponse getHelpCommandResult() {
-        return queryCommandMapper.resultToResponse(helpCommandResult);
+        return queryCommandMapper.slashResultToResponse(helpCommandResult);
     }
 }

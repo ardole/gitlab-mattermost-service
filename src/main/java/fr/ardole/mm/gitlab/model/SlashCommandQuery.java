@@ -2,7 +2,7 @@ package fr.ardole.mm.gitlab.model;
 
 import java.util.List;
 
-public class SlashCommand {
+public class SlashCommandQuery {
 
     private List<String> arguments;
     private String module;

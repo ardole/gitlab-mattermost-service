@@ -8,10 +8,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties({SecurityConfig.class, SlashConfig.class})
-public class GitlabSlashCommandApplication {
+public class GitlabMattermostService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GitlabSlashCommandApplication.class, args);
+		SpringApplication.run(GitlabMattermostService.class, args);
 	}
 
 }

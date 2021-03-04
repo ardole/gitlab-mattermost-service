@@ -1,17 +1,17 @@
 package fr.ardole.mm.gitlab.slash.api;
 
-import fr.ardole.mm.gitlab.model.SlashCommand;
+import fr.ardole.mm.gitlab.model.SlashCommandQuery;
 import fr.ardole.mm.gitlab.model.SlashCommandResult;
 
 public abstract class SlashCommandExecuter {
 
-    public SlashCommandResult execute(SlashCommand slashCommand) {
+    public SlashCommandResult execute(SlashCommandQuery slashCommandQuery) {
         SlashCommandResult slashCommandResult = new SlashCommandResult();
-        slashCommandResult.setText(executeAndGetText(slashCommand));
+        slashCommandResult.setText(executeAndGetText(slashCommandQuery));
         return slashCommandResult;
     }
 
-    protected abstract String executeAndGetText(SlashCommand slashCommand);
+    protected abstract String executeAndGetText(SlashCommandQuery slashCommandQuery);
 
 
 }

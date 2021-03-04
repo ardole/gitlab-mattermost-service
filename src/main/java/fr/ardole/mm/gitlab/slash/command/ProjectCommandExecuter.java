@@ -2,7 +2,7 @@ package fr.ardole.mm.gitlab.slash.command;
 
 import fr.ardole.mm.gitlab.configuration.SlashConfig;
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
-import fr.ardole.mm.gitlab.model.SlashCommand;
+import fr.ardole.mm.gitlab.model.SlashCommandQuery;
 import fr.ardole.mm.gitlab.slash.api.SlashCommandExecuter;
 import fr.ardole.mm.gitlab.slash.converter.FreemarkerResponseConverter;
 import org.gitlab4j.api.GitLabApi;
@@ -27,7 +27,7 @@ public class ProjectCommandExecuter extends SlashCommandExecuter {
     FreemarkerResponseConverter slashResponseConverter;
 
     @Override
-    protected String executeAndGetText(SlashCommand slashCommand) {
+    protected String executeAndGetText(SlashCommandQuery slashCommandQuery) {
         try {
             GitLabApi gitLabApi = new GitLabApi(slashConfig.getGitlabHostUrl(), slashConfig.getGitlabPersonalAccessToken());
             ProjectFilter privateProjectsFilter = new ProjectFilter().withVisibility(Visibility.PRIVATE);
