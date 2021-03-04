@@ -7,11 +7,11 @@ public abstract class SlashCommandExecuter {
 
     public SlashCommandResult execute(SlashCommandQuery slashCommandQuery) {
         SlashCommandResult slashCommandResult = new SlashCommandResult();
-        slashCommandResult.setText(executeAndGetText(slashCommandQuery));
+        executeAndSetResult(slashCommandQuery, slashCommandResult);
         return slashCommandResult;
     }
 
-    protected abstract String executeAndGetText(SlashCommandQuery slashCommandQuery);
+    protected abstract void executeAndSetResult(SlashCommandQuery slashCommandQuery, SlashCommandResult slashCommandResult);
 
 
 }

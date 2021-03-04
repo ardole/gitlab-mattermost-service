@@ -35,6 +35,7 @@ public class QueryCommandMapper {
     public MattermostResponse slashResultToResponse(SlashCommandResult slashCommandResult) {
         MattermostResponse mattermostResponse = new MattermostResponse();
         mattermostResponse.setText(slashCommandResult.getText());
+        mattermostResponse.setResponseType(slashCommandResult.getResponseType());
         return mattermostResponse;
     }
 
