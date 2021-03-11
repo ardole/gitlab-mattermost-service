@@ -13,7 +13,9 @@ Main goal of this project is to build a slash command service for mattermost, pr
 
 |Command|Description|
 |---|---|
-|`/gitlab help`|Print the help|
+|`/gitlab help`|Print this help|
+|`/gitlab project [detail]`|List projects information|
+|`/gitlab mergerequest [opened,closed,locked,merged,all]`|List merge requests (default list opened merge-requests only|
 
 ## Build it
 
@@ -70,13 +72,19 @@ It uses these libraries:
 - [gitlab4j-api](https://github.com/gitlab4j/gitlab4j-api)
 - [Freemarker](https://freemarker.apache.org/)
 
-## TODO
+## WIP
 
 - Restrict access to data according to their rights on Gitlab
+Simple use of `gitLabApi.setSudoAsId()`
+- Allow two mode of authentication (mapped or not)
+
+## TODO
+
 - Allow multiple alias for commands
+- Allow multiple token for multiple team
 - Automatic mapper of commands according to configuration
 - Automatic mapper of commands according to class-loader
 - Auto generation of help according to available commands
 
 What it will become ?
-- A generic service with dependencies injection of command, maybe a Karaf project ?
+- A generic service with dependencies injection of command

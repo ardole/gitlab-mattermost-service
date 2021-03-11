@@ -21,7 +21,7 @@ public class ApiRegistry {
     private ProjectApi projectApi;
 
     @PostConstruct
-    private void initialiseProjectApi() {
+    private void initializeMainApi() {
         GitLabApi gitLabApi = new GitLabApi(slashConfig.getGitlabHostUrl(), slashConfig.getGitlabPersonalAccessToken());
         userApi = gitLabApi.getUserApi();
         mergeRequestApi = gitLabApi.getMergeRequestApi();
