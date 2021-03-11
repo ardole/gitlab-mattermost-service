@@ -1,22 +1,19 @@
 package fr.ardole.mm.gitlab.slash.command;
 
 import fr.ardole.mm.gitlab.api.ResponseType;
-import fr.ardole.mm.gitlab.configuration.SlashConfig;
 import fr.ardole.mm.gitlab.exception.SlashCommandException;
 import fr.ardole.mm.gitlab.model.SlashCommandQuery;
 import fr.ardole.mm.gitlab.model.SlashCommandResult;
+import fr.ardole.mm.gitlab.service.ApiRegistry;
 import fr.ardole.mm.gitlab.slash.api.SlashCommandExecuter;
 import fr.ardole.mm.gitlab.slash.converter.FreemarkerResponseConverter;
-import org.gitlab4j.api.GitLabApi;
 import org.gitlab4j.api.GitLabApiException;
-import org.gitlab4j.api.ProjectApi;
 import org.gitlab4j.api.models.Project;
 import org.gitlab4j.api.models.ProjectFilter;
 import org.gitlab4j.api.models.Visibility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,25 +22,17 @@ import java.util.Map;
 public class ProjectCommandExecuter extends SlashCommandExecuter {
 
     @Autowired
-    SlashConfig slashConfig;
-
-    @Autowired
     FreemarkerResponseConverter slashResponseConverter;
 
-    private ProjectFilter privateProjectsFilter;
-    private ProjectApi projectApi;
+    @Autowired
+    ApiRegistry apiRegistry;
 
-    @PostConstruct
-    private void initialiseProjectApi() {
-        GitLabApi gitLabApi = new GitLabApi(slashConfig.getGitlabHostUrl(), slashConfig.getGitlabPersonalAccessToken());
-        privateProjectsFilter = new ProjectFilter().withVisibility(Visibility.PRIVATE);
-        projectApi = gitLabApi.getProjectApi();
-    }
+    ProjectFilter privateProjectsFilter = new ProjectFilter().withVisibility(Visibility.PRIVATE);
 
     @Override
     protected void executeAndSetResult(SlashCommandQuery slashCommandQuery, SlashCommandResult slashCommandResult) {
         try {
-            List<Project> projects = projectApi.getProjects(privateProjectsFilter);
+            List<Project> projects = apiRegistry.getProjectApi().getProjects(privateProjectsFilter);
             Map<String, Object> map = new HashMap<>();
             map.put("projects", projects);
             List<String> arguments = slashCommandQuery.getArguments();
