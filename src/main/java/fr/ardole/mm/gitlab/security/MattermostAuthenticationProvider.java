@@ -40,11 +40,7 @@ public class MattermostAuthenticationProvider implements AuthenticationProvider 
     private boolean credentialIsValid(Object credential) {
         if (credential instanceof String) {
             String token = (String) credential;
-            if (securityConfig.hasBCryptedConfiguration()) {
-                return matchWithBCryptedValue(token);
-            } else {
-                return matchWithPlainTextValue(token);
-            }
+            return matchWithBCryptedValue(token);
         } else {
             return false;
         }
@@ -54,7 +50,4 @@ public class MattermostAuthenticationProvider implements AuthenticationProvider 
         return bCryptPasswordEncoder.matches(token, securityConfig.getMmTokenBCrypted());
     }
 
-    private boolean matchWithPlainTextValue(String token) {
-        return token.equals(securityConfig.getMmToken());
-    }
 }
