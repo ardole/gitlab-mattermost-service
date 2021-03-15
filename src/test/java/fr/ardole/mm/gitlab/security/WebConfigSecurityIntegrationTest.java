@@ -1,4 +1,4 @@
-package fr.ardole.mm.gitlab.controller;
+package fr.ardole.mm.gitlab.security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class SlashControllerSecurityIntegrationTest {
+class WebConfigSecurityIntegrationTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -72,6 +72,14 @@ class SlashControllerSecurityIntegrationTest {
         mockMvc.perform(post("/").param("token", "the-very-secured-value").param("text", "help")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is(HttpStatus.OK.value()));
+    }
+
+    @Test
+    public void doGetOnLoginAndLogoutIsNotFound() throws Exception {
+        mockMvc.perform(get("/login").param("token", "the-very-secured-value"))
+                .andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+        mockMvc.perform(get("/logout").param("token", "the-very-secured-value"))
+                .andExpect(status().is(HttpStatus.NOT_FOUND.value()));
     }
 
 }
