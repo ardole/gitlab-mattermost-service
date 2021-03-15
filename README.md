@@ -74,8 +74,11 @@ It uses these libraries:
 
 ## WIP
 
-- Restrict access to data according to their rights on Gitlab
-Simple use of `gitLabApi.setSudoAsId()`
+- NOW : Naive access using token (can be unsecured)
+- Tomorrow : Restrict access to data according to their rights on Gitlab
+Simple use of `gitLabApi.setSudoAsId()` -> must be admin of platform
+and users of Gitlab and mattermost must be synchronized -> and 
+`ApiRegistry` will be redesigned
 - Allow two mode of authentication (mapped or not)
 
 ## TODO
@@ -85,6 +88,5 @@ Simple use of `gitLabApi.setSudoAsId()`
 - Automatic mapper of commands according to configuration
 - Automatic mapper of commands according to class-loader
 - Auto generation of help according to available commands
-
-What it will become ?
+It will become soon:
 - A generic service with dependencies injection of command

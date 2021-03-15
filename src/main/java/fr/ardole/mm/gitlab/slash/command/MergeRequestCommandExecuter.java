@@ -9,6 +9,7 @@ import fr.ardole.mm.gitlab.slash.api.SlashCommandExecuter;
 import fr.ardole.mm.gitlab.slash.converter.FreemarkerResponseConverter;
 import org.gitlab4j.api.Constants;
 import org.gitlab4j.api.GitLabApiException;
+import org.gitlab4j.api.MergeRequestApi;
 import org.gitlab4j.api.models.MergeRequest;
 import org.gitlab4j.api.models.MergeRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,13 @@ public class MergeRequestCommandExecuter extends SlashCommandExecuter {
             if (arguments.size() >= 1) {
                 mergeRequestState = Constants.MergeRequestState.valueOf(arguments.get(0).toUpperCase());
             }
-            List<MergeRequest> mergeRequests = apiRegistry.getMergeRequestApi().getMergeRequests(new MergeRequestFilter().withAssigneeId(id).withState(mergeRequestState).withOrderBy(Constants.MergeRequestOrderBy.CREATED_AT));
+            MergeRequestApi mergeRequestApi = apiRegistry.getMergeRequestApi();
+            MergeRequestFilter baseMergeRequestFilter = new MergeRequestFilter().withState(mergeRequestState).withOrderBy(Constants.MergeRequestOrderBy.CREATED_AT);
+            List<MergeRequest> assignedMergeRequests = mergeRequestApi.getMergeRequests(baseMergeRequestFilter.withAssigneeId(id));
+            List<MergeRequest> openedMergeRequests = mergeRequestApi.getMergeRequests(baseMergeRequestFilter.withAuthorId(id));
             Map<String, Object> map = new HashMap<>();
-            map.put("mergerequests", mergeRequests);
+            map.put("assignedMergeRequests", assignedMergeRequests);
+            map.put("openedMergeRequests", openedMergeRequests);
             String text = slashResponseConverter.convert(map, getMarkdownTemplateName());
             slashCommandResult.setText(text);
             slashCommandResult.setResponseType(ResponseType.in_channel);
