@@ -3,7 +3,6 @@ package fr.ardole.mm.gitlab.configuration;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.Matchers.is;
 
 class SecurityConfigTest {
@@ -11,9 +10,6 @@ class SecurityConfigTest {
     @Test
     void hasBCryptedConfiguration() {
         SecurityConfig securityConfig = new SecurityConfig();
-        assertThat(securityConfig.hasBCryptedConfiguration(), is(false));
-
-        securityConfig.setMmToken("ABCD");
         assertThat(securityConfig.hasBCryptedConfiguration(), is(false));
 
         securityConfig.setMmTokenBCrypted("ABCD");
