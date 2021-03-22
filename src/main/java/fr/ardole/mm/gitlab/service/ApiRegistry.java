@@ -1,10 +1,7 @@
 package fr.ardole.mm.gitlab.service;
 
 import fr.ardole.mm.gitlab.configuration.SlashConfig;
-import org.gitlab4j.api.GitLabApi;
-import org.gitlab4j.api.MergeRequestApi;
-import org.gitlab4j.api.ProjectApi;
-import org.gitlab4j.api.UserApi;
+import org.gitlab4j.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +16,7 @@ public class ApiRegistry {
     private UserApi userApi;
     private MergeRequestApi mergeRequestApi;
     private ProjectApi projectApi;
+    private EnvironmentsApi environmentsApi;
 
     @PostConstruct
     private void initializeMainApi() {
@@ -26,6 +24,7 @@ public class ApiRegistry {
         userApi = gitLabApi.getUserApi();
         mergeRequestApi = gitLabApi.getMergeRequestApi();
         projectApi = gitLabApi.getProjectApi();
+        environmentsApi = gitLabApi.getEnvironmentsApi();
     }
 
     public UserApi getUserApi() {
@@ -38,5 +37,9 @@ public class ApiRegistry {
 
     public ProjectApi getProjectApi() {
         return projectApi;
+    }
+
+    public EnvironmentsApi getEnvironmentsApi() {
+        return environmentsApi;
     }
 }

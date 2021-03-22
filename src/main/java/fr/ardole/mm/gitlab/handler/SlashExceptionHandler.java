@@ -1,6 +1,7 @@
 package fr.ardole.mm.gitlab.handler;
 
 import fr.ardole.mm.gitlab.api.MattermostResponse;
+import fr.ardole.mm.gitlab.exception.BadUsageException;
 import fr.ardole.mm.gitlab.service.SlashCommandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,12 @@ public class SlashExceptionHandler extends ResponseEntityExceptionHandler {
     public @ResponseBody ResponseEntity<MattermostResponse> handleCommandException(Exception ex) {
         LOGGER.error(ex.getMessage(), ex);
         return ResponseEntity.ok(slashCommandService.getErrorCommandResult());
+    }
+
+    @ExceptionHandler(BadUsageException.class)
+    public @ResponseBody ResponseEntity<MattermostResponse> handleBadUsageException(BadUsageException ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        return ResponseEntity.ok(slashCommandService.getHelpCommandResult());
     }
 
 }

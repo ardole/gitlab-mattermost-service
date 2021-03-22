@@ -40,6 +40,9 @@ public class SlashCommandService {
             case "mergerequest":
                 bean = context.getBean("MergeRequestCommand", SlashCommandExecuter.class);
                 break;
+            case "env":
+                bean = context.getBean("EnvironmentCommand", SlashCommandExecuter.class);
+                break;
             default:
                 return getErrorCommandResult();
         }
